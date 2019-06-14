@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+        
+            <h:form>
+            <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+            <p:panel header="Registro de Hardware">
+                <f:facet name="footer"> 
+                    <p:commandButton title="Guardar" disabled="#{hardwareBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form" id="btnSave" actionListener="#{hardwareBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{hardwareBean.modoEdit}" icon="fa fa-refresh Fs16 white" update="tabla,@form" id="btnUpdate" actionListener="#{hardwareBean.update()}" ></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{hardwareBean.modoEdit}"  icon="fa fa-trash Fs16 white" update="tabla,@form" id="bntDelete" actionListener="#{hardwareBean.delete()}" ></p:commandButton>
+                </f:facet>
+               
+                <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                    
+                    <p:outputLabel for="id_sol_hard">Id Hardware</p:outputLabel>
+                    <p:inputText id="id_sol_hard" readonly="true" value="#{hardwareBean.hardware.id_sol_hard}"></p:inputText>
+                    
+                    <p:outputLabel for="nombre_sol_hard">Nombre Hardware</p:outputLabel> 
+                    <p:inputText id="nombre_sol_hard" value="#{hardwareBean.hardware.nombre_sol_hard}"></p:inputText>
+                                    
+                </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Hardware">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay hardware creados" id="tabla" value="#{hardwareBean.lista}" var="item">
+                    
+                    <p:column sortBy="#{item.id_sol_hard}" headerText="id_sol_hard">
+                        <h:outputText value="#{item.id_sol_hard}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column sortBy="#{item.nombre_sol_hard}" headerText="nombre_sol_hard">
+                        <h:outputText value="#{item.nombre_sol_hard}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form" process="@this" actionListener="#{hardwareBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{hardwareBean.hardware}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

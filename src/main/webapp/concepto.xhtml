@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+           <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+           <p:panel header="Registro de Conceptos">
+                <f:facet name="footer"> 
+                    <p:commandButton title="Guardar" disabled="#{conceptoBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnSave"  actionListener="#{conceptoBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{conceptoBean.modoEdit}" icon="fa fa-refresh Fs16 white"      update="tabla,@form"  id="btnUpdate"  actionListener="#{conceptoBean.update()}"></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{conceptoBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form"  id="btnDelete"  actionListener="#{conceptoBean.delete()}"></p:commandButton>
+                </f:facet>
+               
+               <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                    <p:outputLabel for="cod_concepto">Codigo Concepto</p:outputLabel>
+                    <p:inputText id="cod_concepto" required="true" placeholder="Digite Codigo" value="#{conceptoBean.concepto.cod_concepto}" ></p:inputText>
+                    
+                    <p:outputLabel for="nom_concepto">Nombre Concepto</p:outputLabel>
+                    <p:inputText id="nom_concepto" required="true" placeholder="Digite Nombre" value="#{conceptoBean.concepto.nom_concepto}"></p:inputText>
+                    
+                    <p:outputLabel for="porcentaje_iva">Porcentaje Iva</p:outputLabel>
+                    <p:inputNumber id="porcentaje_iva" required="true" value="#{conceptoBean.concepto.porcentaje_iva}" symbol="%" symbolPosition="s" decimalPlaces="0"></p:inputNumber>
+                    
+             </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Conceptos">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay conceptos creados" id="tabla" value="#{conceptoBean.lista}" var="item">
+                    
+                    <p:column sortBy="#{item.idconcepto}" headerText="idconcepto">
+                        <h:outputText value="#{item.idconcepto}"></h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.cod_concepto}" headerText="cod_concepto">
+                        <h:outputText value="#{item.cod_concepto}"></h:outputText>
+                    </p:column>
+                    <p:column  filterBy="#{item.nom_concepto}" headerText="nom_concepto">
+                        <h:outputText value="#{item.nom_concepto}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="porcentaje_iva">
+                        <h:outputText value="#{item.porcentaje_iva}" ></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form,tabla" process="@this" actionListener="#{conceptoBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{conceptoBean.concepto}" />
+                        </p:commandButton>
+                       </p:column> 
+                    
+                    
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

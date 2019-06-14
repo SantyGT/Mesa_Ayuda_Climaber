@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+        
+       
+            <h:form>
+            <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+           <p:panel header="Gestión de Usuarios">
+                <f:facet name="footer">  <!-- disabled="#{usuarioBean.modoInsert}" disabled="#{usuarioBean.modoEdit}" -->
+                    <p:commandButton  title="Guardar" disabled="#{usuarioBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnSave"  actionListener="#{usuarioBean.save()}" ></p:commandButton>
+                    <p:commandButton  title="Actualizar" disabled="#{usuarioBean.modoEdit}" icon="fa fa-refresh Fs16 white" update="tabla,@form"  id="btnUpdate"  actionListener="#{usuarioBean.update()}"></p:commandButton>
+                    <p:commandButton  title="Eliminar" disabled="#{usuarioBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form"  id="btnEliminar"  actionListener="#{usuarioBean.delete()}"></p:commandButton>
+                </f:facet>
+                <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                   <p:outputLabel for="id_usuario">Id</p:outputLabel>
+                    <p:inputText id="id_usuario" readonly="true" value="#{usuarioBean.usuario.id_usuario}"></p:inputText>
+                   
+                    <p:outputLabel for="nombre_usuario">Nombre</p:outputLabel>
+                    <p:inputText id="nombre_usuario"  placeholder="Digite el Usuario" style="width: 100% !important;" value="#{usuarioBean.usuario.nombre_usuario}"></p:inputText>
+                    
+                    <p:outputLabel for="cedula_usuario">Cedula</p:outputLabel>
+                    <p:inputText id="cedula_usuario" placeholder="Digite la Cedula"  value="#{usuarioBean.usuario.cedula_usuario}"></p:inputText>
+                    
+                    <p:outputLabel for="estado_usuario">Estado</p:outputLabel>
+                    <p:inputText id="estado_usuario" placeholder="Digite el Estado"  value="#{usuarioBean.usuario.estado_usuario}"></p:inputText>
+
+                </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado Usuarios">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No data row" id="tabla" value="#{usuarioBean.lista}" var="item">
+                    
+                    <p:column sortBy="#{item.id_usuario}" headerText="Id">
+                        <h:outputText  value="#{item.id_usuario}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column sortBy="#{item.nombre_usuario}" headerText="Nombre">
+                        <h:outputText value="#{item.nombre_usuario}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column  sortBy="#{item.cedula_usuario}" headerText="Cedula">
+                        <h:outputText value="#{item.cedula_usuario}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column  sortBy="#{item.estado_usuario}" headerText="Estado">
+                        <h:outputText value="#{item.estado_usuario}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Opcion">
+                        <p:commandButton update="@form" process="@this" actionListener="#{usuarioBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

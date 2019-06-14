@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <!-- <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+        
+        <h3 class="hardblue TexAlCenter">Empty Page</h3>
+        <span class="TexAlCenter DispBlock Wid100">Use this page to start from scratch and place your custom content.</span>-->
+       
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+            <p:panel>
+                <f:facet name="footer">  <!-- disabled="#{configBean.modoInsert}" disabled="#{configBean.modoEdit}" -->
+                    <p:commandButton  icon="fa fa-save Fs16 white" update="tabla,@form"  id="btn"  actionListener="#{configBean.save()}" >Grabar</p:commandButton>
+                    <p:commandButton  icon="ui-icon-check" update="tabla,@form"  id="btn2"  actionListener="#{configBean.update()}">Actualizar</p:commandButton>
+                </f:facet>
+               <!-- <p:panelGrid columns="2">-->
+               <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                   <p:outputLabel for="id">Id</p:outputLabel>
+                    <p:inputText id="id" readonly="true" value="#{configBean.configuracion.id}"></p:inputText>
+                   
+                    <p:outputLabel for="nit">NIT</p:outputLabel>
+                    <p:inputText id="nit"  placeholder="Digite el NIT" value="#{configBean.configuracion.nit}"></p:inputText>
+                    
+                    <p:outputLabel for="rasonsocial">Razón Social</p:outputLabel>
+                    <p:inputText id="rasonsocial" placeholder="Digite la Razón Social" style="width: 100% !important;" value="#{configBean.configuracion.rasonsocial}"></p:inputText>
+                    
+                    <p:outputLabel for="nomLegal">Nombre Legal</p:outputLabel>
+                    <p:inputText id="nomLegal" placeholder="Digite Nombre Legal" style="width: 100% !important;" value="#{configBean.configuracion.nomLegal}" ></p:inputText>
+                    
+                    <p:outputLabel for="telefonoEmp">Telefono Empresa</p:outputLabel>
+                    <p:inputText id="telefonoEmp"  placeholder="Digite Telefono de la Empresa" value="#{configBean.configuracion.telefonoEmp}" ></p:inputText>
+                    
+                    <p:outputLabel for="direccionEmp">Direccion Empresa</p:outputLabel>
+                    <p:inputText id="direccionEmp" placeholder="Digite la Direccion de la empresa" style="width: 100% !important;" value="#{configBean.configuracion.direccionEmp}" ></p:inputText>
+                    
+                    <p:outputLabel for="emailEmp">Email Empresa</p:outputLabel>
+                    <p:inputText id="emailEmp" placeholder="Digite E-mail" style="width: 100% !important;" value="#{configBean.configuracion.emailEmp}" ></p:inputText>
+                    
+                    <p:outputLabel for="sitioWebEmp">Sitio Web Empresa</p:outputLabel>
+                    <p:inputText id="sitioWebEmp" placeholder="Digite Sitio WEB" style="width: 100% !important;" value="#{configBean.configuracion.sitioWebEmp}" ></p:inputText>
+                    
+                    <p:outputLabel for="ciudadEmp">Ciudad Empresa</p:outputLabel>
+                    <p:inputText id="ciudadEmp" placeholder="Digite la ciudad de la empresa" value="#{configBean.configuracion.ciudadEmp}" ></p:inputText>
+                    
+                    <p:outputLabel for="paisEmp">Pais Empresa</p:outputLabel>
+                    <p:inputText id="paisEmp" placeholder="Digite Pais de la empresa" value="#{configBean.configuracion.paisEmp}" ></p:inputText>
+                    
+                    <p:outputLabel for="resoludian">Resolución DIAN</p:outputLabel>
+                    <p:inputText id="resoludian" placeholder="Digite Resolución DIAN" style="width: 100% !important;" value="#{configBean.configuracion.resoludian}" ></p:inputText>
+                    
+                    <p:outputLabel for="facturaDian">Facturas DIAN</p:outputLabel>
+                    <p:inputText id="facturaDian" placeholder="Digite Factura DIAN" style="width: 100% !important;" value="#{configBean.configuracion.facturaDian}" ></p:inputText>
+                    
+                    <p:outputLabel for="prefijoDian">Prefijo DIAN</p:outputLabel>
+                    <p:inputText id="prefijoDian" placeholder="Digite Prefijo de Facturacion DIAN" value="#{configBean.configuracion.prefijoDian}" ></p:inputText>
+                    
+                    <p:outputLabel for="numConsFact">Número Consecutivo Factura</p:outputLabel>
+                    <p:inputText id="numConsFact" placeholder="Digite Consecutivo de Facturacion DIAN" style="width: 100% !important;" value="#{configBean.configuracion.numConsFact}" ></p:inputText>
+                    
+                    <p:outputLabel for="regimenEmp">Regimen Empresa</p:outputLabel>
+                    <p:inputText id="regimenEmp" placeholder="Digite Tipo de Regimen" style="width: 60% !important;" value="#{configBean.configuracion.regimenEmp}" ></p:inputText>
+                    
+                </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado Configuracion">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No data row" id="tabla" value="#{configBean.lista}" var="item">
+                    
+                    <p:column sortBy="#{item.id}" headerText="Id">
+                        <h:outputText  value="#{item.id}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column sortBy="#{item.nit}" headerText="NIT">
+                        <h:outputText value="#{item.nit}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column  sortBy="#{item.rasonsocial}" headerText="Rason Social">
+                        <h:outputText value="#{item.rasonsocial}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column sortBy="#{item.nomLegal}"  headerText="Nombre Legal">
+                        <h:outputText value="#{item.nomLegal}" ></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Telefono Empresa">
+                        <h:outputText value="#{item.telefonoEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Direccion Empresa">
+                        <h:outputText value="#{item.direccionEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Email Empresa">
+                        <h:outputText value="#{item.emailEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Sitio Web Empresa">
+                        <h:outputText value="#{item.sitioWebEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Ciudad Empresa">
+                        <h:outputText value="#{item.ciudadEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Pais Empresa">
+                        <h:outputText value="#{item.paisEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Resolución DIAN">
+                        <h:outputText value="#{item.resoludian}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Facturas DIAN">
+                        <h:outputText value="#{item.facturaDian}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Prefijo DIAN">
+                        <h:outputText value="#{item.prefijoDian}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Número Consecutivo Factura">
+                        <h:outputText value="#{item.numConsFact}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Regimen Empresa">
+                        <h:outputText value="#{item.regimenEmp}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update="@form" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{configBean.configuracion}" />
+                        </p:commandButton>
+                    </p:column>
+                    
+                    <p:column style="width:32px;text-align: center"> <!-- actionListener="#{configBean.changeMode()}" -->
+                        <p:commandButton update="@form"   icon="fa fa-trash Fs16 white" title="Delete">
+                            <f:setPropertyActionListener value="#{item}" target="#{configBean.configuracion}" />
+                        </p:commandButton>
+                    </p:column>
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

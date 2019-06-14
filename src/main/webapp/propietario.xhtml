@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+           
+             
+       <h:form>
+           <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+            <p:panel header="Registro de Propietarios">
+                
+                <f:facet name="footer">  <!-- disabled="#{propietarioBean.modoInsert}" disabled="#{propietarioBean.modoEdit}" -->
+                    <p:commandButton title="Guardar" disabled="#{propietarioBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnSave"  actionListener="#{propietarioBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{propietarioBean.modoEdit}" icon="fa fa-refresh Fs16 white"      update="tabla,@form"  id="btnUpdate"  actionListener="#{propietarioBean.update()}"></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{propietarioBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form"  id="btnDelete"  actionListener="#{propietarioBean.delete()}"></p:commandButton>
+                </f:facet>
+               
+                <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                    <p:outputLabel for="ccnit">Cedula ó Nit</p:outputLabel>
+                    <p:inputNumber id="ccnit" required="True" placeholder="Digite Cedula ó Nit" value="#{propietarioBean.propietario.ccnit}" decimalPlaces="0"></p:inputNumber>
+                   
+                    <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                    <p:inputText id="nombre" required="true" placeholder="Digite Su Nombre" style="width: 100% !important;" value="#{propietarioBean.propietario.nombre}"></p:inputText>
+                    
+                    <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                    <p:inputText id="direccion" placeholder="Digite su Direccion" style="width: 100% !important;" value="#{propietarioBean.propietario.direccion}" ></p:inputText>
+                    
+                    <p:outputLabel for="telefono">Telefono </p:outputLabel>
+                    <p:inputNumber id="telefono"  placeholder="Digite su Telefono " value="#{propietarioBean.propietario.telefono}" ></p:inputNumber>
+                    
+                    <p:outputLabel for="celular">Celular</p:outputLabel>
+                    <p:inputNumber id="celular" placeholder="Digite su Numero Celular" style="width: 100% !important;" value="#{propietarioBean.propietario.celular}" ></p:inputNumber>
+                    
+                    <p:outputLabel for="email">Email </p:outputLabel>
+                    <p:inputText id="email" required="true" label="email" size="40"
+                                 validatorMessage="Invalid email format"
+                                 value="#{propietarioBean.propietario.email}">
+
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                    </p:inputText>
+                    
+                    <p:outputLabel for="ciudad">Ciudad</p:outputLabel>
+                    <p:inputText id="ciudad" placeholder="Digite la Ciudad " style="width: 100% !important;" value="#{propietarioBean.propietario.ciudad}" ></p:inputText>
+                    
+                    <p:outputLabel for="sexo">Sexo</p:outputLabel>
+                    <p:selectOneMenu id="sexo" value="#{propietarioBean.propietario.sexo}" style="width:110px">
+                       <f:selectItem itemLabel="Seleccione..." itemValue="" />
+                       <f:selectItem itemLabel="Masculino" itemValue="M" />
+                       <f:selectItem itemLabel="Femenino" itemValue="F" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="porccomi">Porcenteje de Comision</p:outputLabel>
+                    <p:inputNumber id="porccomi" required="true" placeholder="Digite El Porcentaje de Comision" style="width: 100% !important;" value="#{propietarioBean.propietario.porccomi}" symbol="%" symbolPosition="s" decimalPlaces="0"></p:inputNumber>
+                      
+                    
+             </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Propietarios">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay propietarios creados" id="tabla" value="#{propietarioBean.lista}" var="item">
+                    
+                    <p:column headerText="ccnit">
+                        <h:outputText value="#{item.ccnit}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="nombre">
+                        <h:outputText value="#{item.nombre}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="direccion">
+                        <h:outputText value="#{item.direccion}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="telefono">
+                        <h:outputText value="#{item.telefono}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="celular">
+                        <h:outputText value="#{item.celular}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="email">
+                        <h:outputText value="#{item.email}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="ciudad">
+                        <h:outputText value="#{item.ciudad}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="sexo">
+                        <h:outputText value="#{item.sexo}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="porccomi">
+                        <h:outputText value="#{item.porccomi}" ></h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.idpropietario}" headerText="id">
+                        <h:outputText value="#{item.idpropietario}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form"  process="@this" actionListener="#{propietarioBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{propietarioBean.propietario}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

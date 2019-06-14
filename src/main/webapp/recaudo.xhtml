@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+           <p:panel header="Listado de  Facturas">
+               <p:dataTable rows="10" emptyMessage="No data row" id="tabla" value="#{facturaBean.listarecau}" filteredValue="#{facturaBean.filteredFactura}" var="item">
+                   
+                    <p:column id="filtro1" filterBy="#{item.cons_factura}" headerText="ConsFactura">
+                       <h:outputText value="#{item.cons_factura}"></h:outputText>
+                    </p:column>
+                    <p:column   headerText="IdContrato">
+                        <h:outputText value="#{item.num_contrato}"></h:outputText>
+                    </p:column>
+                    <p:column  headerText="FechaCreac">
+                        <h:outputText value="#{item.fecha_creacion}"/>
+                    </p:column>
+                    <p:column  headerText="FechaFact">
+                        <h:outputText value="#{item.fecha_facturacion}"/>
+                    </p:column>
+                    <p:column  headerText="Dias">
+                        <h:outputText value="#{item.dias}"/>
+                    </p:column>
+                    <p:column  headerText="Prefijo">
+                        <h:outputText value="#{item.prefijo}"/>
+                    </p:column>
+                    <p:column  headerText="Idpropied">
+                        <h:outputText value="#{item.cod_propiedad}"/>
+                    </p:column>
+                    <p:column id="filtro2" filterBy="#{item.cc_nit_cliente}" headerText="CC/Nit">
+                        <h:outputText value="#{item.cc_nit_cliente}"/>
+                    </p:column>
+                    <p:column  headerText="Obs">
+                        <h:outputText value="#{item.observacion}"/>
+                    </p:column>
+                    <p:column  headerText="Valor">
+                        <h:outputText value="#{item.valor}"/>
+                    </p:column>
+                    <p:column  headerText="SaldFact">
+                        <h:outputText value="#{item.saldo_factura}"/>
+                    </p:column>
+                    <p:column  headerText="Iva" >
+                        <h:outputText value="#{item.iva}"/>
+                    </p:column>
+                    
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update="@form" process="@this" actionListener="#{facturaBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View" >
+                            <f:setPropertyActionListener value="#{item}" target="#{facturaBean.factura}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+           
+            <p:panel header="Registro de Pagos">
+                <f:facet name="footer">
+                    <p:commandButton title="Pagar" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnUpdate"  actionListener="#{facturaBean.updateRecaudo()}" ></p:commandButton>
+                    <!-- onclick="document.getElementById( 'filtro1' ).value = '',document.getElementById( 'filtro2' ).value = ''"-->
+                </f:facet>
+               
+               <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                    <p:outputLabel for="cons_factura">Consecutivo Factura</p:outputLabel>
+                    <p:inputText id="cons_factura" readonly="true" value="#{facturaBean.factura.cons_factura}"></p:inputText>
+                    
+                    <p:outputLabel for="idcontra">Id Contrato</p:outputLabel>
+                    <p:inputText id="idcontra" readonly="true" value="#{facturaBean.factura.num_contrato}"></p:inputText>
+                    
+                    <p:outputLabel for="fecha_creacion">Fecha Creación</p:outputLabel>
+                    <p:inputText id="fecha_creacion" readonly="true" value="#{facturaBean.factura.fecha_creacion}"></p:inputText>
+                    
+                    <p:outputLabel for="fecha_facturacion">Fecha Facturación</p:outputLabel>
+                    <p:inputText id="fecha_facturacion" readonly="true" value="#{facturaBean.factura.fecha_facturacion}"></p:inputText>
+                    
+                    <p:outputLabel for="dias">Dias</p:outputLabel>
+                    <p:inputText id="dias" readonly="true" value="#{facturaBean.factura.dias}"></p:inputText>
+                    
+                    <p:outputLabel for="prefijo">Prefijo</p:outputLabel>
+                    <p:inputText id="prefijo" readonly="true" value="#{facturaBean.factura.prefijo}"></p:inputText>
+                    
+                    <p:outputLabel for="idpropied">Codigo Propiedad</p:outputLabel>
+                    <p:inputText id="idpropied" readonly="true" value="#{facturaBean.factura.cod_propiedad}"></p:inputText>
+                    
+                    <p:outputLabel for="idclie">CC ó Nit Cliente</p:outputLabel>
+                    <p:inputText id="idclie" readonly="true" value="#{facturaBean.factura.cc_nit_cliente}"></p:inputText>
+                    
+                    <p:outputLabel for="observacion">Observación</p:outputLabel>
+                    <p:inputText id="observacion" readonly="true" value="#{facturaBean.factura.observacion}"></p:inputText>
+                    
+                    <p:outputLabel for="valor">Valor</p:outputLabel>
+                    <p:inputText id="valor" readonly="true" value="#{facturaBean.factura.valor}"></p:inputText>
+                    
+                    <p:outputLabel for="saldo_factura">Saldo Factura</p:outputLabel>
+                    <p:inputText id="saldo_factura" readonly="true" value="#{facturaBean.factura.saldo_factura}"></p:inputText>
+                    
+                    <p:outputLabel for="iva">Iva</p:outputLabel>
+                    <p:inputText id="iva" readonly="true" value="#{facturaBean.factura.iva}"></p:inputText>
+                    
+                </p:panelGrid>
+            </p:panel>
+           
+        </h:form>
+    </ui:define>
+</ui:composition>

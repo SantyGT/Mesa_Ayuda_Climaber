@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>SENTINEL BLUE | Prime Faces Layouts Header</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+        <h:outputScript name="js/login.js" library="sentinel-layout" />
+        <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+
+
+        <style>
+            body {
+                background-image:url('Fondo/2.jpg');
+                background-size: 100%;
+            }
+
+            .fondo{
+                position: absolute;
+                margin: 0px; 
+                padding: 0px;
+                border: none;
+                z-index: -999999; 
+                max-width: none; 
+                width: 100%; 
+                height: 100%; 
+            }
+        </style>
+
+
+        <script>
+            /**
+             * Array con las imagenes y enlaces que se iran mostrando en la web
+             */
+            var imagenes = new Array(
+                    ['resources/FONDOS/1.jpg'],
+                    ['resources/FONDOS/2.jpg'],
+                    );
+
+            /**
+             * Funcion para cambiar la imagen y link
+             */
+            function rotarImagenes()
+            {
+                // obtenemos un numero aleatorio entre 0 y la cantidad de imagenes que hay
+                var index = Math.floor((Math.random() * imagenes.length));
+
+                // cambiamos la imagen y la url
+                document.getElementById("FondoLogin").src = imagenes[index][0];
+                //document.getElementById("link").href = imagenes[index][1];
+            }
+
+            /**
+             * Función que se ejecuta una vez cargada la página
+             */
+            onload = function ()
+            {
+                // Cargamos una imagen aleatoria
+                rotarImagenes();
+
+                // Indicamos que cada 5 segundos cambie la imagen
+                setInterval(rotarImagenes, 3000);
+            }
+        </script>
+    </h:head>
+
+    <h:body class="fontRegular white-back">  <!-- login-back -->
+        <div class='fondo'>
+            <img src="" alt="" id="FondoLogin" class="fondo"/>
+        </div>
+
+        <div class="Container">
+            <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
+                <a href="" id="login-logo">
+                    <h:graphicImage name="images/logo_cmb.png" styleClass="Fleft" library="sentinel-layout"/>
+                    <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">CLÍNICA</span><span class="hardblue">MADRE BERNARDA</span></span>
+                </a>
+                <div class="EmptyBox10"></div>
+            </div>
+
+            <!-- LOGIN BOX COVER START -->
+            <div class="Container85 MaxWid500 white-back Fnone MarAuto BordRad10" id="login-box">
+                <div class="Container">
+                    <div class="Container50 TexAlCenter Animated05 BoxSizeBorder TabBtn left TabBtnActiveLeft" role="1">
+                        <div class="Container80 Fnone MarAuto FontBold"><i class="icon-lock"></i> Login</div>
+                    </div>
+                    <div class="Container50 TexAlCenter Animated05 BoxSizeBorder TabBtn right" role="2">
+                        <div class="Container80 Fnone MarAuto FontBold"><i class="icon-key-1"></i> Olvido su clave?</div>
+                    </div>
+                    
+                    <div class="Container90 Fnone MarAuto TexAlCenter TabContent OvHidden" id="TAB1">
+                        <h:form id="loginForm">
+                        <div class="EmptyBox50"></div>
+                        <p:inputText id="username" value="#{login.user}" required="true" placeholder="E-Mail" styleClass="Container80 Fnone MarAuto Fs18" />
+                        <p:message for="username"></p:message>
+                        <div class="EmptyBox10"></div>
+                        <p:password id="password" value="#{login.pwd}" required="true" placeholder="Clave" styleClass="Container80 Fnone MarAuto Fs18" feedback="false" />
+                        <p:message for="password"></p:message>
+                        <div class="EmptyBox20"></div>
+                        
+                        <div class="EmptyBox30"></div>
+                         <p:commandButton action="#{login.validateUsernamePassword}" value="Entrar" update="loginForm" ajax="true"></p:commandButton>
+                        <div class="EmptyBox50"></div>
+                        </h:form>
+                    </div>
+
+                    <div class="Container90 Fnone MarAuto DispNone TexAlCenter TabContent OvHidden" id="TAB2">
+                        <div class="EmptyBox50"></div>
+                        <p:inputText value="" placeholder="E-mail" styleClass="Container80 Fnone MarAuto Fs18"/>
+                        <div class="EmptyBox20"></div>
+                        <p:button value="Enviar Solicitud" styleClass="Fs16"></p:button>
+                        <div class="EmptyBox50"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- LOGIN BOX COVER END -->
+
+    </h:body>
+
+</html>

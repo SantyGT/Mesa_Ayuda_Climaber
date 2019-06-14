@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+            <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+            <p:panel header="Registro de Clientes">
+                
+                <f:facet name="footer"> 
+                   <p:commandButton title="Guardar" disabled="#{clientBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnSave"  actionListener="#{clientBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{clientBean.modoEdit}" icon="fa fa-refresh Fs16 white"      update="tabla,@form"  id="btnUpdate"  actionListener="#{clientBean.update()}"></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{clientBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form"  id="btnDelete"  actionListener="#{clientBean.delete()}"></p:commandButton>
+
+                </f:facet>
+               
+               <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+       
+                    <p:outputLabel for="ccnit">Celdula ó Nit </p:outputLabel>
+                    <p:inputText id="ccnit"  required="true" placeholder="Digite Cedula ó NIT" value="#{clientBean.cliente.ccnit}" ></p:inputText>
+                    
+                    <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                    <p:inputText id="nombre" required="true"  placeholder="Digite Su Nombre" style="width: 100% !important;" value="#{clientBean.cliente.nombre}"></p:inputText>
+                    
+                    <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                    <p:inputText id="direccion" placeholder="Digite su Direccion" style="width: 100% !important;" value="#{clientBean.cliente.direccion}" ></p:inputText>
+                    
+                    <p:outputLabel for="telefono">Telefono </p:outputLabel>
+                    <p:inputNumber id="telefono"  placeholder="Digite su Telefono " value="#{clientBean.cliente.telefono}" decimalPlaces="0" ></p:inputNumber>
+                    
+                    <p:outputLabel for="celular">Celular</p:outputLabel>
+                    <p:inputNumber id="celular" placeholder="Digite su Numero Celular" style="width: 100% !important;" value="#{clientBean.cliente.celular}" decimalPlaces="0"  ></p:inputNumber>
+                    
+                    <p:outputLabel for="email">Email </p:outputLabel>
+                    <p:inputText id="email" required="true" label="email" size="40"
+                                 validatorMessage="Invalid email format"
+                                 value="#{clientBean.cliente.email}">
+
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                    </p:inputText>
+
+                    <p:outputLabel for="ciudad">Ciudad</p:outputLabel>
+                    <p:inputText id="ciudad" placeholder="Digite la Ciudad " style="width: 100% !important;" value="#{clientBean.cliente.ciudad}" ></p:inputText>
+                    
+                    <p:outputLabel for="sexo">Sexo</p:outputLabel>
+                    <p:selectOneMenu id="sexo" value="#{clientBean.cliente.sexo}" style="width:110px">
+                       <f:selectItem itemLabel="Seleccione..." itemValue="" />
+                       <f:selectItem itemLabel="Masculino" itemValue="M" />
+                       <f:selectItem itemLabel="Femenino" itemValue="F" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="asesor">Asesor</p:outputLabel>
+                    <p:inputText id="asesor" placeholder="Digite Nombre del asesor" style="width: 100% !important;" value="#{clientBean.cliente.asesor}" ></p:inputText>
+                    
+             </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Clientes">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay clientes creados" id="tabla" value="#{clientBean.lista}" var="item">
+                    
+                   <p:column sortBy="#{item.idcliente}" headerText="idcliente">
+                        <h:outputText value="#{item.idcliente}"></h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.ccnit}" headerText="ccnit">
+                        <h:outputText value="#{item.ccnit}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="nombre">
+                        <h:outputText value="#{item.nombre}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="direccion">
+                        <h:outputText value="#{item.direccion}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="telefono">
+                        <h:outputText value="#{item.telefono}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="celular">
+                        <h:outputText value="#{item.celular}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="email">
+                        <h:outputText value="#{item.email}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="ciudad">
+                        <h:outputText value="#{item.ciudad}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="sexo">
+                        <h:outputText value="#{item.sexo}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="asesor">
+                        <h:outputText value="#{item.asesor}" ></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form" process="@this" actionListener="#{clientBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{clientBean.cliente}" />
+                        </p:commandButton>
+                        
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

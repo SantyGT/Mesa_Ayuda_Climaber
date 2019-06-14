@@ -1,0 +1,196 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       
+        <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+           <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+            <p:panel header="Registro De Propiedades">
+                <f:facet name="footer">  
+                    <p:commandButton title="Guardar" disabled="#{propiedadBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form" id="btnSave" actionListener="#{propiedadBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{propiedadBean.modoEdit}" icon="fa fa-refresh Fs16 white" update="tabla,@form" id="btnUpdate" actionListener="#{propiedadBean.update()}"></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{propiedadBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form" id="btnDelete" actionListener="#{propiedadBean.delete()}"></p:commandButton>
+                </f:facet>
+               
+               <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                    <p:outputLabel for="codigo">Codigo</p:outputLabel>
+                    <p:inputText id="codigo" required="true" placeholder="Digite Codigo" value="#{propiedadBean.propiedad.codigo}">
+                        <f:validateLength maximum="10" />
+                    </p:inputText>
+                    
+                    <p:outputLabel for="nombre">Nombre</p:outputLabel>
+                    <p:inputText id="nombre" required="true" placeholder="Digite Nombre" value="#{propiedadBean.propiedad.nombre}"></p:inputText>
+                    
+                    <p:outputLabel for="pais">Pais</p:outputLabel>
+                    <p:inputText id="pais" placeholder="Digite Pais" value="#{propiedadBean.propiedad.pais}">
+                        <f:validateLength maximum="20" />
+                    </p:inputText>
+                    
+                    <p:outputLabel for="ciudad">Ciudad</p:outputLabel>
+                    <p:inputText id="ciudad" placeholder="Digite Ciudad" value="#{propiedadBean.propiedad.ciudad}">
+                        <f:validateLength maximum="20" />
+                    </p:inputText>
+                    
+                    <p:outputLabel for="barrio">Barrio</p:outputLabel>
+                    <p:inputText id="barrio" placeholder="Digite Barrio" value="#{propiedadBean.propiedad.barrio}">
+                        <f:validateLength maximum="20" />
+                    </p:inputText>
+                    
+                    
+                   <p:outputLabel for="sector">Sector</p:outputLabel>
+                   <p:inputText id="sector" placeholder="Digite Sector" value="#{propiedadBean.propiedad.sector}">
+                        <f:validateLength maximum="20" />
+                    </p:inputText>
+                    
+                    <p:outputLabel for="zona">Zona</p:outputLabel>
+                    <p:inputText id="zona" placeholder="Digite Zona" value="#{propiedadBean.propiedad.zona}">
+                        <f:validateLength maximum="20" />
+                    </p:inputText>
+                    
+                   <p:outputLabel for="direccion">Direccion</p:outputLabel>
+                   <p:inputText id="direccion" placeholder="Digite Direccion" value="#{propiedadBean.propiedad.direccion}"></p:inputText>
+                    
+                    <p:outputLabel for="area_tot">Area Total</p:outputLabel>
+                    <p:inputNumber id="area_tot" value="#{propiedadBean.propiedad.area_tot}" decimalPlaces="0">
+                        <f:validateLength maximum="10" />
+                    </p:inputNumber>
+                    
+                    <p:outputLabel for="area_cons">Area Construida</p:outputLabel>
+                    <p:inputNumber id="area_cons" value="#{propiedadBean.propiedad.area_cons}" decimalPlaces="0">
+                        <f:validateLength maximum="10" />
+                    </p:inputNumber>
+                    
+                    <p:outputLabel for="estrato">Estrato</p:outputLabel>
+                    <p:selectOneMenu id="estrato" value="#{propiedadBean.propiedad.estrato}" style="width:110px">
+                       <f:selectItem itemLabel="Seleccione" itemValue="" />
+                       <f:selectItem itemLabel="1" itemValue="1" />
+                       <f:selectItem itemLabel="2" itemValue="2" />
+                       <f:selectItem itemLabel="3" itemValue="3" />
+                       <f:selectItem itemLabel="4" itemValue="4" />
+                       <f:selectItem itemLabel="5" itemValue="5" />
+                       <f:selectItem itemLabel="6" itemValue="6" />
+                       
+                       <f:validateLength maximum="1" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="tipo">Tipo</p:outputLabel>
+                    <p:selectOneMenu id="tipo" required="true" value="#{propiedadBean.propiedad.tipo}" style="width:110px">
+                       <f:selectItem itemLabel="Seleccione" itemValue="" />
+                       <f:selectItem itemLabel="APARTAMENTO" itemValue="APARTAMENTO" />
+                       <f:selectItem itemLabel="CASA" itemValue="CASA" />
+                       <f:selectItem itemLabel="LOCAL" itemValue="LOCAL" />
+                                              
+                       <f:validateLength maximum="20" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="valor">Valor</p:outputLabel>
+                    <p:inputNumber id="valor" required="true" value="#{propiedadBean.propiedad.valor}" decimalPlaces="0"></p:inputNumber>
+                    
+                    <p:outputLabel for="observacion">Observacion</p:outputLabel>
+                    <p:inputText id="observacion" placeholder="Digite Observacion" value="#{propiedadBean.propiedad.observacion}"></p:inputText>
+                    
+                    <p:outputLabel for="est_ocupacion">Estado de Ocupacion</p:outputLabel>
+                    <p:selectOneMenu id="est_ocupacion" required="true" value="#{propiedadBean.propiedad.est_ocupacion}" style="width:110px">
+                       <f:selectItem itemLabel="Seleccione" itemValue="" />
+                       <f:selectItem itemLabel="Ocupado" itemValue="o" />
+                       <f:selectItem itemLabel="Desocupado" itemValue="d" />
+                       
+                       <f:validateLength maximum="1" />
+                    </p:selectOneMenu>
+          
+                    <p:outputLabel>Propietario</p:outputLabel>
+                    <p:selectOneMenu   filter="true" filterMatchMode="contains"  value="#{propiedadBean.propiedad.idpropietario}" >     
+                        <f:selectItems value="#{propietarioBean.lista}" var="propi" itemValue="#{propi.idpropietario}" itemLabel="#{propi.nombre}"/>
+                    </p:selectOneMenu>
+                    
+                    
+             </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Propiedades">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay propiedades creadas" id="tabla" value="#{propiedadBean.lista}" var="item">
+                    
+                   <p:column  headerText="codigo">
+                        <h:outputText value="#{item.codigo}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="nombre">
+                        <h:outputText value="#{item.nombre}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="pais">
+                        <h:outputText value="#{item.pais}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="ciudad">
+                        <h:outputText value="#{item.ciudad}" ></h:outputText>
+                    </p:column>
+                    <p:column  headerText="barrio">
+                        <h:outputText value="#{item.barrio}"></h:outputText>
+                    </p:column>
+                    <p:column  headerText="sector">
+                        <h:outputText value="#{item.sector}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="zona">
+                        <h:outputText value="#{item.zona}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="direccion">
+                        <h:outputText value="#{item.direccion}" ></h:outputText>
+                    </p:column>
+                    <p:column  headerText="area_tot">
+                        <h:outputText value="#{item.area_tot}"></h:outputText>
+                    </p:column>
+                    <p:column  headerText="area_cons">
+                        <h:outputText value="#{item.area_cons}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="estrato">
+                        <h:outputText value="#{item.estrato}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="tipo">
+                        <h:outputText value="#{item.tipo}" ></h:outputText>
+                    </p:column>
+                    <p:column  headerText="valor">
+                        <h:outputText value="#{item.valor}"></h:outputText>
+                    </p:column>
+                    <p:column  headerText="observacion">
+                        <h:outputText value="#{item.observacion}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="est_ocupacion">
+                        <h:outputText value="#{item.est_ocupacion}"></h:outputText>
+                    </p:column>
+                   <p:column sortBy="#{item.idpropietario}" headerText="idpropietario">
+                        <h:outputText value="#{item.idpropietario}"></h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.idpropiedad}" headerText="idpropiedad">
+                        <h:outputText value="#{item.idpropiedad}"></h:outputText>
+                    </p:column>
+                    
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form" process="@this" actionListener="#{propiedadBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{propiedadBean.propiedad}" />
+                        </p:commandButton>
+                        
+                    </p:column>
+                    
+                    
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

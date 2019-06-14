@@ -1,0 +1,124 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       
+            <h:form>
+            <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+           <p:panel header="Registro de Contratos">
+                <f:facet name="footer"> 
+                    <p:commandButton title="Guardar" disabled="#{contratoBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnSave"  actionListener="#{contratoBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{contratoBean.modoEdit}" icon="fa fa-refresh Fs16 white" update="tabla,@form"  id="btnUpdate"  actionListener="#{contratoBean.update()}"></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{contratoBean.modoEdit}"  icon="fa fa-trash Fs16 white" update="tabla,@form" id="bntDelete" actionListener="#{contratoBean.delete()}"></p:commandButton>
+                </f:facet>
+               
+               <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                    <p:outputLabel for="numcontrato">Numero Contrato</p:outputLabel>
+                    <p:inputText id="numcontrato" readonly="true" value="#{contratoBean.contrato.numcontrato}"></p:inputText>
+                   
+                    <p:outputLabel for="feccreacion">Fecha Creacion</p:outputLabel>
+                    <p:calendar id="feccreacion"  required="true" value="#{contratoBean.contrato.feccreacion}" showOn="button" />
+                    
+                    <p:outputLabel for="fecinicio">Fecha Inicio</p:outputLabel>
+                    <p:calendar id="fecinicio" required="true" value="#{contratoBean.contrato.fecinicio}" showOn="button" />
+                    
+                    <p:outputLabel for="fecvenc">Fecha Vencimiento</p:outputLabel>
+                    <p:calendar id="fecvenc" required="true" value="#{contratoBean.contrato.fecvenc}" showOn="button" />
+
+                   <p:outputLabel>Cliente</p:outputLabel>
+                   <p:selectOneMenu   filter="true" filterMatchMode="contains"  value="#{contratoBean.contrato.idclie}" >     
+                        <f:selectItems value="#{clientBean.lista}" var="cli" itemValue="#{cli.idcliente}" itemLabel="#{cli.nombre}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="valor">Valor</p:outputLabel>
+                    <p:inputNumber id="valor" required="true" value="#{contratoBean.contrato.valor}" ></p:inputNumber>
+                    
+                    <p:outputLabel for="observacion">Observacion</p:outputLabel>
+                    <p:inputText id="observacion" placeholder="Digite Observacion" value="#{contratoBean.contrato.observacion}" ></p:inputText>
+                    
+                    <p:outputLabel for="estado">Estado</p:outputLabel>
+                    <p:selectOneMenu id="estado" required="true" value="#{contratoBean.contrato.estado}" style="width:125px">
+                       <f:selectItem itemLabel="Seleccione..." itemValue="" />
+                       <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                       <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel>Propiedad</p:outputLabel>
+                    <p:selectOneMenu   filter="true" filterMatchMode="contains"  value="#{contratoBean.contrato.idpropied}" >     
+                        <f:selectItems value="#{propiedadBean.lista}" var="prop" itemValue="#{prop.idpropiedad}" itemLabel="#{prop.nombre}"/>
+                    </p:selectOneMenu>
+                  
+             </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Contratos">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay contratos creados" id="tabla" value="#{contratoBean.lista}" var="item">
+                    
+                    <p:column sortBy="#{item.numcontrato}" headerText="numcontrato">
+                        <h:outputText value="#{item.numcontrato}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column  headerText="feccreacion">
+                        <h:outputText value="#{item.feccreacion}"></h:outputText>
+                    
+                    </p:column>
+                    
+                    <p:column  headerText="fecinicio">
+                        <h:outputText value="#{item.fecinicio}" ></h:outputText>
+                  
+                    </p:column>
+                    
+                    <p:column headerText="fecvencimiento">
+                        <h:outputText value="#{item.fecvenc}"></h:outputText>
+                    
+                    </p:column>
+                    
+                    <p:column headerText="idcliente">
+                        <h:outputText value="#{item.idclie}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="valor">
+                        <h:outputText value="#{item.valor}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="observacion">
+                        <h:outputText value="#{item.observacion}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="estado">
+                        <h:outputText value="#{item.estado}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="idpropiedad">
+                        <h:outputText value="#{item.idpropied}"></h:outputText>
+                    </p:column>
+                    
+                   <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form" process="@this" actionListener="#{contratoBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{contratoBean.contrato}" />
+                        </p:commandButton>
+                        
+                    </p:column>
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

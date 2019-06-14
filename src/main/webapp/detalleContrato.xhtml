@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+           <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+           <p:panel header="Registro de Detalles Contrato">
+                <f:facet name="footer"> 
+                    <p:commandButton title="Guardar" disabled="#{detalleContratoBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btnSave"  actionListener="#{detalleContratoBean.save()}" ></p:commandButton>
+                    <p:commandButton title="Actualizar" disabled="#{detalleContratoBean.modoEdit}" icon="fa fa-refresh Fs16 white"      update="tabla,@form"  id="btnUpdate"  actionListener="#{detalleContratoBean.update()}"></p:commandButton>
+                    <p:commandButton title="Eliminar" disabled="#{detalleContratoBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form"  id="btnDelete"  actionListener="#{detalleContratoBean.delete()}"></p:commandButton>
+                </f:facet>
+               
+               <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                    <p:outputLabel>Contrato</p:outputLabel>
+                    <p:selectOneMenu   filter="true" filterMatchMode="contains"  value="#{detalleContratoBean.detalleContrato.idcontra}" >     
+                        <f:selectItems value="#{contratoBean.lista}" var="detc" itemValue="#{detc.numcontrato}" itemLabel="#{detc.numcontrato}"/>
+                    </p:selectOneMenu>
+                 
+                    <p:outputLabel>Concepto</p:outputLabel>
+                    <p:selectOneMenu   filter="true" filterMatchMode="contains"  value="#{detalleContratoBean.detalleContrato.idconc}" >     
+                        <f:selectItems value="#{conceptoBean.lista}" var="conc" itemValue="#{conc.idconcepto}" itemLabel="#{conc.nom_concepto}"/>
+                    </p:selectOneMenu>
+                  
+                    <p:outputLabel for="valor">Valor</p:outputLabel>
+                    <p:inputNumber id="valor" required="true"  value="#{detalleContratoBean.detalleContrato.valor}" decimalPlaces="0"></p:inputNumber>
+                    
+                    <p:outputLabel for="estado">Estado</p:outputLabel>
+                    <p:selectOneMenu id="estado" required="true" value="#{detalleContratoBean.detalleContrato.estado}" style="width:125px">
+                       <f:selectItem itemLabel="Seleccione..." itemValue="" />
+                       <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                       <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="periodo_ini">Periodo Inicial </p:outputLabel>
+                    <p:calendar id="periodo_ini" required="true" value="#{detalleContratoBean.detalleContrato.periodo_ini}" showOn="button" />
+                    
+                    <p:outputLabel for="periodo_fin">Periodo Final </p:outputLabel>
+                    <p:calendar id="periodo_fin" required="true" value="#{detalleContratoBean.detalleContrato.periodo_fin}" showOn="button" />
+  
+             </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado de Detalles Contrato">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay detalles creados" id="tabla" value="#{detalleContratoBean.lista}" var="item">
+                    
+                   <p:column sortBy="#{item.idDetalleContratoConcep}" headerText="idDetalleContratoConcep">
+                        <h:outputText value="#{item.idDetalleContratoConcep}"></h:outputText>
+                    </p:column>
+                    <p:column sortBy="#{item.idcontra}" headerText="idcontra">
+                        <h:outputText value="#{item.idcontra}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="idconc">
+                        <h:outputText value="#{item.idconc}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="valor">
+                        <h:outputText value="#{item.valor}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="estado">
+                        <h:outputText value="#{item.estado}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="periodo_ini">
+                        <h:outputText value="#{item.periodo_ini}" ></h:outputText>
+                    </p:column>
+                    <p:column headerText="periodo_fin">
+                        <h:outputText value="#{item.periodo_fin}" ></h:outputText>
+                    </p:column>
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                        <p:commandButton update="@form" process="@this" actionListener="#{detalleContratoBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{detalleContratoBean.detalleContrato}" />
+                        </p:commandButton>
+                        
+                    </p:column>
+                    
+                    
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

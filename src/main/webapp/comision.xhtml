@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+       
+       <h:form>
+           <p:panel header="Listado de Facturas">
+               <p:dataTable  paginator="true" rows="10" emptyMessage="No data row" id="tabla" value="#{facturaBean.listafactu}" filteredValue="#{facturaBean.filteredFactura}" var="item">
+                    
+                    <p:column filterBy="#{item.cons_factura}" headerText="ConsFactura">
+                       <h:outputText value="#{item.cons_factura}"></h:outputText>
+                    </p:column>
+                    <p:column  headerText="NumContrato">
+                       <h:outputText value="#{item.num_contrato}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="FechaFact">
+                        <h:outputText value="#{item.fecha_facturacion}"/>
+                    </p:column>
+                    <p:column  headerText="Dias">
+                        <h:outputText value="#{item.dias}"/>
+                    </p:column>
+                    <p:column  headerText="Prefijo">
+                        <h:outputText value="#{item.prefijo}"/>
+                    </p:column>
+                    <p:column  headerText="cod_propiedad">
+                        <h:outputText value="#{item.cod_propiedad}"/>
+                    </p:column>
+                    <p:column filterBy="#{item.cc_nit_cliente}" headerText="Cliente">
+                        <h:outputText value="#{item.cc_nit_cliente}"/>
+                    </p:column>
+                    <p:column  headerText="valor">
+                        <h:outputText value="#{item.valor}"/>
+                    </p:column>
+                    <p:column  headerText="Iva" >
+                        <h:outputText value="#{item.iva}"/>
+                    </p:column>
+                    <p:column  headerText="Valor Comision" >
+                       <h:outputText value="#{item.valorComision}"/>
+                    </p:column>
+                   
+                    <p:column style="width:100px;text-align: center" headerText="Cargar">
+                       <p:commandButton update="@form"  process="@this" actionListener="#{facturaBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{facturaBean.factura}" />
+                        </p:commandButton>
+                    </p:column> 
+                   
+                   </p:dataTable>
+            </p:panel>
+           
+           
+           <p:panel header="Informacion Factura">
+               <p:panelGrid columns="4" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+
+                   <p:outputLabel for="cons_factura" >Consecutivo Factura</p:outputLabel>
+                   <p:inputText id="cons_factura" readonly="true" value="#{facturaBean.factura.cons_factura}"></p:inputText>
+
+                   <p:outputLabel for="num_contrato">Numero Contrato</p:outputLabel>
+                   <p:inputText id="num_contrato" readonly="true"  value="#{facturaBean.factura.num_contrato}"></p:inputText>
+
+                   <p:outputLabel for="fecha_facturacion">Fecha Facturación</p:outputLabel>
+                   <p:calendar id="fecha_facturacion"  readonly="true" value="#{facturaBean.factura.fecha_facturacion}"/>
+
+                   <p:outputLabel for="dias">Dias</p:outputLabel>
+                   <p:inputText id="dias" readonly="true"  value="#{facturaBean.factura.dias}"></p:inputText>
+
+                   <p:outputLabel for="prefijo">Prefijo</p:outputLabel>
+                   <p:inputText id="prefijo" readonly="true"  value="#{facturaBean.factura.prefijo}"></p:inputText>
+
+                   <p:outputLabel for="cod_propiedad">Codigo Propiedad</p:outputLabel>
+                   <p:inputText id="cod_propiedad" readonly="true"  value="#{facturaBean.factura.cod_propiedad}"></p:inputText>
+
+                   <p:outputLabel for="cc_nit_cliente">CC ó Nit Cliente</p:outputLabel>
+                   <p:inputText id="cc_nit_cliente" readonly="true"  value="#{facturaBean.factura.cc_nit_cliente}"></p:inputText>
+
+                   <p:outputLabel for="valor">Valor</p:outputLabel>
+                   <p:inputText id="valor" readonly="true"   value="#{facturaBean.factura.valor}"></p:inputText>
+
+                   <p:outputLabel for="iva">Iva</p:outputLabel>
+                   <p:inputText id="iva" readonly="true"  value="#{facturaBean.factura.iva}"></p:inputText>
+
+                   <p:outputLabel for="valorComision">Valor Comision</p:outputLabel>
+                   <p:inputNumber id="valorComision" readonly="true" value="#{facturaBean.factura.valorComision}" symbol="%" symbolPosition="s" decimalPlaces="0"></p:inputNumber>
+
+               </p:panelGrid>
+               
+               <f:facet name="footer"> 
+                    <p:commandButton title="Actualizar" icon="fa fa-refresh Fs16 white" update="tabla,@form"  id="btnUpdate"  actionListener="#{facturaBean.updateComision()}"></p:commandButton>
+               </f:facet>
+           </p:panel>
+           
+           
+        </h:form>
+    </ui:define>
+</ui:composition>

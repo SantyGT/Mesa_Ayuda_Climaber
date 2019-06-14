@@ -1,0 +1,124 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        
+       <style type="text/css">
+            .ui-panel {
+                margin-top:20px
+            }
+
+            .inlineCalendarDemo > .hasDatepicker {
+                padding-left: 50px;
+            }
+        </style>
+        
+       
+            <h:form>
+            <p:messages id="messages" showDetail="true" closable="true">
+                
+            </p:messages>
+           <p:panel header="Gestión de Usuarios">
+                <f:facet name="footer">  <!-- disabled="#{usuarioBean.modoInsert}" disabled="#{usuarioBean.modoEdit}" -->
+                    <p:commandButton  title="Guardar" disabled="#{usuarioBean.modoInsert}" icon="fa fa-save Fs16 white" update="tabla,@form"  id="btn"  actionListener="#{usuarioBean.save()}" ></p:commandButton>
+                    <p:commandButton  title="Actualizar" disabled="#{usuarioBean.modoEdit}" icon="fa fa-refresh Fs16 white" update="tabla,@form"  id="btn2"  actionListener="#{usuarioBean.update()}"></p:commandButton>
+                    <p:commandButton  title="Eliminar" disabled="#{usuarioBean.modoEdit}" icon="fa fa-trash Fs16 white" update="tabla,@form"  id="btnEliminar"  actionListener="#{usuarioBean.delete()}"></p:commandButton>
+                </f:facet>
+               <!-- <p:panelGrid columns="2">-->
+               <p:panelGrid columns="2" layout="grid" style="border:0px !important; background:none;" styleClass="ui-panelgrid-blank">
+                   
+                   <p:outputLabel for="iduser">Id</p:outputLabel>
+                    <p:inputText id="iduser" readonly="true" value="#{usuarioBean.usuario.iduser}"></p:inputText>
+                   
+                    <p:outputLabel for="correo">Correo</p:outputLabel>
+                    <p:inputText id="correo"  placeholder="Digite el Correo" style="width: 100% !important;" value="#{usuarioBean.usuario.correo}"></p:inputText>
+                    
+                    <p:outputLabel for="clave">Clave</p:outputLabel>
+                    <p:inputText id="clave" placeholder="Digite la Clave"  value="#{usuarioBean.usuario.clave}"></p:inputText>
+                    
+
+                    <p:selectBooleanCheckbox itemLabel="Registros" value="#{usuarioBean.usuario.m1_reg}" id="m1_reg"/>
+                    <p:selectBooleanCheckbox itemLabel="Reg. Propietarios" value="#{usuarioBean.usuario.m11_proprio}" id="m11_proprio"/>
+                    <p:selectBooleanCheckbox itemLabel="Reg. Propiedades" value="#{usuarioBean.usuario.m12_propdad}" id="m12_propdad"/>
+                    <p:selectBooleanCheckbox itemLabel="Reg. Clientes" value="#{usuarioBean.usuario.m13_cli}" id="m13_cli"/>
+                    <p:selectBooleanCheckbox itemLabel="Reg. Contratos" value="#{usuarioBean.usuario.m14_cont}" id="m14_cont"/>
+
+                    <p:selectBooleanCheckbox itemLabel="Facturación" value="#{usuarioBean.usuario.m2_fact}" id="m2_fact"/>
+
+                    <p:selectBooleanCheckbox itemLabel="Recaudo" value="#{usuarioBean.usuario.m3_rec}" id="m3_rec"/>
+
+                    <p:selectBooleanCheckbox itemLabel="Comisión" value="#{usuarioBean.usuario.m4_com}" id="m4_com"/>
+
+                    <p:selectBooleanCheckbox itemLabel="Informes y Consultas" value="#{usuarioBean.usuario.m5_inf}" id="m5_inf"/>
+ 
+                </p:panelGrid>
+            </p:panel>
+            
+            <p:panel header="Listado Usuarios">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No data row" id="tabla" value="#{usuarioBean.lista}" var="item">
+                    
+                    <p:column sortBy="#{item.iduser}" headerText="Id">
+                        <h:outputText  value="#{item.iduser}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column sortBy="#{item.correo}" headerText="Correo">
+                        <h:outputText value="#{item.correo}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column  sortBy="#{item.clave}" headerText="Clave">
+                        <h:outputText value="#{item.clave}"></h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Perm. Registros">
+                        <p:selectBooleanCheckbox value="#{item.m1_reg}"/>
+                    </p:column>
+                    
+                    <p:column  headerText="Reg. Propietarios">
+                        <p:selectBooleanCheckbox value="#{item.m11_proprio}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Reg. Propiedades">
+                        <p:selectBooleanCheckbox value="#{item.m12_propdad}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Reg. Clientes">
+                        <p:selectBooleanCheckbox value="#{item.m13_cli}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Reg. Contratos">
+                        <p:selectBooleanCheckbox value="#{item.m14_cont}"/>
+                    </p:column>
+                    
+                    
+                    
+                    <p:column headerText="Facturas">
+                        <p:selectBooleanCheckbox value="#{item.m2_fact}"/>
+                    </p:column>
+                    <p:column headerText="Recaudo">
+                        <p:selectBooleanCheckbox value="#{item.m3_rec}"/>
+                    </p:column>
+                    <p:column headerText="Comision">
+                        <p:selectBooleanCheckbox value="#{item.m4_com}"/>
+                    </p:column>
+                    <p:column headerText="Inf./Consul." >
+                        <p:selectBooleanCheckbox value="#{item.m5_inf}"/>
+                    </p:column>
+                    
+                    
+                    
+                    <p:column style="width:100px;text-align: center" headerText="Opcion">
+                        <p:commandButton update="@form" process="@this" actionListener="#{usuarioBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{usuarioBean.usuario}" />
+                        </p:commandButton>
+                        
+                    </p:column>
+  
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>
