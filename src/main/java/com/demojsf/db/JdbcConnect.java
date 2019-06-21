@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcConnect {
-    private static final String URL="jdbc:mysql://localhost:3306/aboconta";
+    private static final String URL="jdbc:mysql://localhost:3306/solicitudes_cmb";
     private static final String USER="root";
     private static final String PASSWORD="estudiante";
     private static transient Connection connection=null;

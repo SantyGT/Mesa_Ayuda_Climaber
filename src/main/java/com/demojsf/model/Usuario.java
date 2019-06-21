@@ -2,7 +2,6 @@
 package com.demojsf.model;
 
  public class Usuario {
-
     
     private int iduser;
     private String correo;
