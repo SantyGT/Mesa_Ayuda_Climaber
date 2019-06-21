@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.demojsf.dao.DaoHardware;
-import com.demojsf.model.Cliente;
+//import com.demojsf.model.Cliente;
 import com.demojsf.model.Hardware;
 import java.sql.Timestamp;
 import javax.faces.application.FacesMessage;
@@ -132,7 +132,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
         return lista;
     }
     
-     public List<String> ListaClientes() {
+    /*public List<String> ListaClientes() {
         List<String> lista = new ArrayList<>();
         try {
             Connection connect = JdbcConnect.getConnect();
@@ -150,7 +150,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
             Logger.getLogger(DaoHardwareImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }
+    }*/
      
      public boolean existe(Hardware h) throws SQLException, ClassNotFoundException {
 

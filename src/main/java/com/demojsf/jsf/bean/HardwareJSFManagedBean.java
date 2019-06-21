@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import com.demojsf.dao.DaoHardware;
 import com.demojsf.db.JdbcConnect;
-import com.demojsf.model.Cliente;
+//import com.demojsf.model.Cliente;
 import com.demojsf.model.Hardware;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class HardwareJSFManagedBean implements Serializable {
 
     private Hardware hardware = new Hardware();
     private List<Hardware> lista = new ArrayList<>();
-    private List<Cliente> listaClientes = new ArrayList<>();
+    //private List<Cliente> listaClientes = new ArrayList<>();
     private DaoHardware dao = new DaoHardwareImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
@@ -64,14 +64,14 @@ public class HardwareJSFManagedBean implements Serializable {
     public void setLista(List<Hardware> lista) {
         this.lista = lista;       
     }
-
+/*
     public List<Cliente> getListaClientes() {
         return listaClientes;
     }
 
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;       
-    }
+    }*/
    
     public Hardware getHardware() {
         return hardware;

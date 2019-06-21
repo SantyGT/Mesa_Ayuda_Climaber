@@ -10,7 +10,6 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import com.demojsf.dao.DaoSoftware;
 import com.demojsf.db.JdbcConnect;
-import com.demojsf.model.Cliente;
 import com.demojsf.model.Software;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +25,6 @@ public class SoftwareJSFManagedBean implements Serializable {
 
     private Software software = new Software();
     private List<Software> lista = new ArrayList<>();
-    private List<Cliente> listaClientes = new ArrayList<>();
     private DaoSoftware dao = new DaoSoftwareImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
@@ -64,15 +62,7 @@ public class SoftwareJSFManagedBean implements Serializable {
     public void setLista(List<Software> lista) {
         this.lista = lista;       
     }
-
-    public List<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;       
-    }
-   
+    
     public Software getSoftware() {
         return software;
     }

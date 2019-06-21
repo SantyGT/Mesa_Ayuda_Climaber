@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.demojsf.dao.DaoEstado;
-import com.demojsf.model.Cliente;
+//import com.demojsf.model.Cliente;
 import com.demojsf.model.Estado;
 import java.sql.Timestamp;
 import javax.faces.application.FacesMessage;
@@ -132,7 +132,7 @@ public class DaoEstadoImpl implements DaoEstado<Estado> {
         return lista;
     }
     
-     public List<String> ListaClientes() {
+    /*public List<String> ListaClientes() {
         List<String> lista = new ArrayList<>();
         try {
             Connection connect = JdbcConnect.getConnect();
@@ -150,9 +150,9 @@ public class DaoEstadoImpl implements DaoEstado<Estado> {
             Logger.getLogger(DaoEstadoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }
+    }*/
      
-     public boolean existe(Estado e) throws SQLException, ClassNotFoundException {
+    public boolean existe(Estado e) throws SQLException, ClassNotFoundException {
 
         Connection connect = JdbcConnect.getConnect();
         PreparedStatement pst = connect.prepareStatement("Select * from Estado where id_estado=?");

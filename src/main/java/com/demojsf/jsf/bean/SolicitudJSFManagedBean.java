@@ -10,7 +10,6 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import com.demojsf.dao.DaoSolicitud;
 import com.demojsf.db.JdbcConnect;
-import com.demojsf.model.Cliente;
 import com.demojsf.model.Solicitud;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +25,6 @@ public class SolicitudJSFManagedBean implements Serializable {
 
     private Solicitud solicitud = new Solicitud();
     private List<Solicitud> lista = new ArrayList<>();
-    private List<Cliente> listaClientes = new ArrayList<>();
     private DaoSolicitud dao = new DaoSolicitudImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
@@ -63,14 +61,6 @@ public class SolicitudJSFManagedBean implements Serializable {
 
     public void setLista(List<Solicitud> lista) {
         this.lista = lista;       
-    }
-
-    public List<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;       
     }
    
     public Solicitud getSolicitud() {

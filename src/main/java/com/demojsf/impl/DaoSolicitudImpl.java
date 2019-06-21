@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.demojsf.dao.DaoSolicitud;
-import com.demojsf.model.Cliente;
+//import com.demojsf.model.Cliente;
 import com.demojsf.model.Solicitud;
 import java.sql.Timestamp;
 import javax.faces.application.FacesMessage;
@@ -159,7 +159,7 @@ public class DaoSolicitudImpl implements DaoSolicitud<Solicitud> {
         return lista;
     }
     
-     public List<String> ListaClientes() {
+    /*public List<String> ListaClientes() {
         List<String> lista = new ArrayList<>();
         try {
             Connection connect = JdbcConnect.getConnect();
@@ -177,7 +177,7 @@ public class DaoSolicitudImpl implements DaoSolicitud<Solicitud> {
             Logger.getLogger(DaoSolicitudImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }
+    }*/
      
      public boolean existe(Solicitud s) throws SQLException, ClassNotFoundException {
 

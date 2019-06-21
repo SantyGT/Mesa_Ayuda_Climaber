@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.demojsf.dao.DaoArea;
-import com.demojsf.model.Cliente;
 import com.demojsf.model.Area;
 import java.sql.Timestamp;
 import javax.faces.application.FacesMessage;
@@ -132,7 +131,7 @@ public class DaoAreaImpl implements DaoArea<Area> {
         return lista;
     }
     
-     public List<String> ListaClientes() {
+    /*public List<String> ListaClientes() {
         List<String> lista = new ArrayList<>();
         try {
             Connection connect = JdbcConnect.getConnect();
@@ -150,9 +149,9 @@ public class DaoAreaImpl implements DaoArea<Area> {
             Logger.getLogger(DaoAreaImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
-    }
+    }*/
      
-     public boolean existe(Area a) throws SQLException, ClassNotFoundException {
+    public boolean existe(Area a) throws SQLException, ClassNotFoundException {
 
         Connection connect = JdbcConnect.getConnect();
         PreparedStatement pst = connect.prepareStatement("Select * from Area where id_area=?");

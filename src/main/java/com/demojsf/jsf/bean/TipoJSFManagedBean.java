@@ -10,7 +10,6 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import com.demojsf.dao.DaoTipo;
 import com.demojsf.db.JdbcConnect;
-import com.demojsf.model.Cliente;
 import com.demojsf.model.Tipo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +25,6 @@ public class TipoJSFManagedBean implements Serializable {
 
     private Tipo tipo = new Tipo();
     private List<Tipo> lista = new ArrayList<>();
-    private List<Cliente> listaClientes = new ArrayList<>();
     private DaoTipo dao = new DaoTipoImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
@@ -63,14 +61,6 @@ public class TipoJSFManagedBean implements Serializable {
 
     public void setLista(List<Tipo> lista) {
         this.lista = lista;       
-    }
-
-    public List<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-
-    public void setListaClientes(List<Cliente> listaClientes) {
-        this.listaClientes = listaClientes;       
     }
    
     public Tipo getTipo() {

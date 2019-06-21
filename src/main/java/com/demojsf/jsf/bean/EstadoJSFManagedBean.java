@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import com.demojsf.dao.DaoEstado;
 import com.demojsf.db.JdbcConnect;
-import com.demojsf.model.Cliente;
+//import com.demojsf.model.Cliente;
 import com.demojsf.model.Estado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class EstadoJSFManagedBean implements Serializable {
 
     private Estado estado = new Estado();
     private List<Estado> lista = new ArrayList<>();
-    private List<Cliente> listaClientes = new ArrayList<>();
+    //private List<Cliente> listaClientes = new ArrayList<>();
     private DaoEstado dao = new DaoEstadoImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
@@ -64,14 +64,14 @@ public class EstadoJSFManagedBean implements Serializable {
     public void setLista(List<Estado> lista) {
         this.lista = lista;       
     }
-
+/*
     public List<Cliente> getListaClientes() {
         return listaClientes;
     }
 
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;       
-    }
+    }*/
    
     public Estado getEstado() {
         return estado;

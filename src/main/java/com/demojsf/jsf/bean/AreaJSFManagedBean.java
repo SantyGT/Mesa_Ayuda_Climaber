@@ -10,7 +10,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import com.demojsf.dao.DaoArea;
 import com.demojsf.db.JdbcConnect;
-import com.demojsf.model.Cliente;
+//import com.demojsf.model.Cliente;
 import com.demojsf.model.Area;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class AreaJSFManagedBean implements Serializable {
 
     private Area area = new Area();
     private List<Area> lista = new ArrayList<>();
-    private List<Cliente> listaClientes = new ArrayList<>();
+    //private List<Cliente> listaClientes = new ArrayList<>();
     private DaoArea dao = new DaoAreaImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
@@ -65,13 +65,13 @@ public class AreaJSFManagedBean implements Serializable {
         this.lista = lista;       
     }
 
-    public List<Cliente> getListaClientes() {
+    /*public List<Cliente> getListaClientes() {
         return listaClientes;
     }
 
     public void setListaClientes(List<Cliente> listaClientes) {
         this.listaClientes = listaClientes;       
-    }
+    }*/
    
     public Area getArea() {
         return area;
