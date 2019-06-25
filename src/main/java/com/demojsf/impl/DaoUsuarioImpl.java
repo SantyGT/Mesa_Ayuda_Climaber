@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.demojsf.dao.DaoUser;
+import com.demojsf.dao.DaoUsuario;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class DaoUsuarioImpl implements DaoUser<Usuario> {
+public class DaoUsuarioImpl implements DaoUsuario<Usuario> {
 
     @Override
     public void save(Usuario u) {
@@ -32,19 +32,13 @@ public class DaoUsuarioImpl implements DaoUser<Usuario> {
                     connect = JdbcConnect.getConnect();
 
                     PreparedStatement pst = connect.
-                            prepareStatement("Insert into User values(?,?,?,?,?,?,?,?,?,?,?,?)");
+                            prepareStatement("Insert into User values(?,?,?,?,?,?)");
                     pst.setInt(1, u.getIduser());
-                    pst.setString(2, u.getCorreo());
-                    pst.setString(3, u.getClave());
-                    pst.setBoolean(4, u.getM1_reg());
-                    pst.setBoolean(5, u.getM11_proprio());
-                    pst.setBoolean(6, u.getM12_propdad());
-                    pst.setBoolean(7, u.getM13_cli());
-                    pst.setBoolean(8, u.getM14_cont());
-                    pst.setBoolean(9, u.getM2_fact());
-                    pst.setBoolean(10, u.getM3_rec());
-                    pst.setBoolean(11, u.getM4_com());
-                    pst.setBoolean(12, u.getM5_inf());
+                    pst.setString(2, u.getNombre_usuario());
+                    pst.setString(3, u.getCedula_usuario());
+                    pst.setString(4, u.getCorreo());
+                    pst.setString(5, u.getClave());
+                    pst.setString(6, u.getEstado_usuario());
                     pst.executeUpdate();
                     connect.commit();
                 } catch (ClassNotFoundException | SQLException ex) {
@@ -74,21 +68,14 @@ public class DaoUsuarioImpl implements DaoUser<Usuario> {
 
             connect = JdbcConnect.getConnect();
 
-            PreparedStatement pst = connect.prepareStatement("Update user set Correo=?,Clave=?,M1_reg=?,M11_proprio=?,M12_propdad=?,M13_cli=?,M14_cont=?,M2_fact=?,M3_rec=?,M4_com=?,M5_inf=? where Iduser=?");
+            PreparedStatement pst = connect.prepareStatement("Update User set Nombre_usuario=?,Cedula_usuario=?,Correo=?,Clave=?,Estado_usuario=? where Iduser=?");
 
-            pst.setInt(12, u.getIduser());
-            pst.setString(1, u.getCorreo());
-            pst.setString(2, u.getClave());
-            pst.setBoolean(3, u.getM1_reg());
-            pst.setBoolean(4, u.getM11_proprio());
-            pst.setBoolean(5, u.getM12_propdad());
-            pst.setBoolean(6, u.getM13_cli());
-            pst.setBoolean(7, u.getM14_cont());
-            pst.setBoolean(8, u.getM2_fact());
-            pst.setBoolean(9, u.getM3_rec());
-            pst.setBoolean(10, u.getM4_com());
-            pst.setBoolean(11, u.getM5_inf());
-
+            pst.setInt(6, u.getIduser());
+            pst.setString(1, u.getNombre_usuario());
+            pst.setString(2, u.getCedula_usuario());
+            pst.setString(3, u.getCorreo());
+            pst.setString(4, u.getClave());
+            pst.setString(5, u.getEstado_usuario());
             pst.executeUpdate();
             connect.commit();
         } catch (ClassNotFoundException | SQLException ex) {
@@ -140,17 +127,11 @@ public class DaoUsuarioImpl implements DaoUser<Usuario> {
                 Usuario u = new Usuario();
 
                 u.setIduser(rs.getInt(1));
-                u.setCorreo(rs.getString(2));
-                u.setClave(rs.getString(3));
-                u.setM1_reg(rs.getBoolean(4));
-                u.setM11_proprio(rs.getBoolean(5));
-                u.setM12_propdad(rs.getBoolean(6));
-                u.setM13_cli(rs.getBoolean(7));
-                u.setM14_cont(rs.getBoolean(8));
-                u.setM2_fact(rs.getBoolean(9));
-                u.setM3_rec(rs.getBoolean(10));
-                u.setM4_com(rs.getBoolean(11));
-                u.setM5_inf(rs.getBoolean(12));
+                u.setNombre_usuario(rs.getString(2));
+                u.setCedula_usuario(rs.getString(3));
+                u.setCorreo(rs.getString(4));
+                u.setClave(rs.getString(5));
+                u.setEstado_usuario(rs.getString(6));
 
                 lista.add(u);
             }

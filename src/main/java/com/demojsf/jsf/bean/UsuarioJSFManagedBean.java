@@ -9,29 +9,16 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
-import com.demojsf.dao.DaoUser;
-
-
-
-/**
- *
- * @author docente
- */
-
+import com.demojsf.dao.DaoUsuario;
 
 @Named(value = "usuarioBean")
 @ViewScoped
 
 public class UsuarioJSFManagedBean implements Serializable {
 
-    
-    
-    /**
-     * Creates a new instance of ClientJSFManagedBean
-     */
     private Usuario usuario = new Usuario();
     private List<Usuario> lista = new ArrayList<>();
-    private DaoUser dao = new DaoUsuarioImpl();
+    private DaoUsuario dao = new DaoUsuarioImpl();
     private boolean modoInsert = false;
     private boolean modoEdit = true;
 
