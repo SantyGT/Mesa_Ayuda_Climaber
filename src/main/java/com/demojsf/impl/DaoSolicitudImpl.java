@@ -32,7 +32,7 @@ public class DaoSolicitudImpl implements DaoSolicitud<Solicitud> {
             connect = JdbcConnect.getConnect();
 
             PreparedStatement pst = connect.
-                    prepareStatement("Insert into Solicitud(id_solicitud,num_solicitud,fecha_solicitud,id_area,id_usuario,cargo_solicitud,asunto_solicitud,observacion,id_estado,id_tipo_solicitud,id_lista_solicitud) values(?,?,?,?,?,?,?,?,?,?,?)");
+                    prepareStatement("Insert into Solicitud (id_solicitud,num_solicitud,fecha_solicitud,id_area,id_usuario,cargo_solicitud,asunto_solicitud,observacion,id_estado,id_tipo_solicitud,id_lista_solicitud) values(?,?,?,?,?,?,?,?,?,?,?)");
 
             pst.setInt(1, s.getId_solicitud());
             pst.setInt(2, s.getNum_solicitud());

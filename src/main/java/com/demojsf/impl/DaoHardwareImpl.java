@@ -32,7 +32,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
             connect = JdbcConnect.getConnect();
 
             PreparedStatement pst = connect.
-                    prepareStatement("Insert into Hardware(id_sol_hard,nombre_sol_hard) values(?,?)");
+                    prepareStatement("Insert into sol_hardware (id_sol_hard,nombre_sol_hard) values(?,?)");
 
             pst.setInt(1, h.getId_sol_hard());
             pst.setString(2, h.getNombre_sol_hard());
@@ -67,7 +67,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
             connect = JdbcConnect.getConnect();
 
             PreparedStatement pst = connect.
-                     prepareStatement("Update Hardware set nombre_sol_hard=? where id_sol_hard=?");
+                     prepareStatement("Update sol_hardware set nombre_sol_hard=? where id_sol_hard=?");
             pst.setInt(2, h.getId_sol_hard());
             pst.setString(1, h.getNombre_sol_hard());
             
@@ -92,7 +92,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
 
             connect = JdbcConnect.getConnect();
 
-            PreparedStatement pst = connect.prepareStatement("Delete from Hardware where id_sol_hard=?");
+            PreparedStatement pst = connect.prepareStatement("Delete from sol_hardware where id_sol_hard=?");
             
             pst.setInt(1, h.getId_sol_hard());
             
@@ -116,7 +116,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
         List<Hardware> lista = new ArrayList<>();
         try {
             Connection connect = JdbcConnect.getConnect();
-            PreparedStatement pst = connect.prepareStatement("Select * from Hardware order by 1");
+            PreparedStatement pst = connect.prepareStatement("Select * from sol_hardware order by 1");
             ResultSet rs = pst.executeQuery();
             
             while (rs.next()) {
@@ -155,7 +155,7 @@ public class DaoHardwareImpl implements DaoHardware<Hardware> {
      public boolean existe(Hardware h) throws SQLException, ClassNotFoundException {
 
         Connection connect = JdbcConnect.getConnect();
-        PreparedStatement pst = connect.prepareStatement("Select * from Hardware where id_sol_hard=?");
+        PreparedStatement pst = connect.prepareStatement("Select * from sol_hardware where id_sol_hard=?");
         pst.setInt(1, h.getId_sol_hard());
         ResultSet rs = pst.executeQuery();
         while (rs.next()) {

@@ -46,11 +46,6 @@
                     <p:outputLabel for="id_usuario">Id Usuario</p:outputLabel>
                     <p:inputNumber id="id_usuario" required="true" value="#{solicitudBean.solicitud.id_usuario}" ></p:inputNumber>
                     
-                    <p:outputLabel>Usuario</p:outputLabel>
-                    <p:selectOneMenu filter="true" filterMatchMode="contains"  value="#{contratoBean.contrato.idclie}" >     
-                        <f:selectItems value="#{clientBean.lista}" var="cli" itemValue="#{cli.idcliente}" itemLabel="#{cli.nombre}"/>
-                    </p:selectOneMenu>
-                    
                     <p:outputLabel for="cargo_solicitud">Cargo Solicitud</p:outputLabel>
                     <p:inputText id="cargo_solicitud" placeholder="Digite su cargo en la empresa" value="#{solicitudBean.solicitud.cargo_solicitud}" ></p:inputText>
                     
@@ -70,7 +65,7 @@
                         <f:selectItems value="#{tipoBean.lista}" var="tipo" itemValue="#{tipo.id_tipo}" itemLabel="#{tipo.nombre_tipo}" />
                     </p:selectOneMenu>
                     
-                    <p:outputLabel>Tipo Solicitud Software</p:outputLabel>
+                    <p:outputLabel>Lista Solicitud Software</p:outputLabel>
                     <p:selectOneMenu value="#{softwareBean.software.id_sol_soft}" >     
                         <f:selectItems value="#{softwareBean.lista}" var="software" itemValue="#{software.id_sol_soft}" itemLabel="#{software.nombre_sol_soft}" />
                     </p:selectOneMenu>
@@ -80,22 +75,11 @@
                         <f:selectItems value="#{hardwareBean.lista}" var="hardware" itemValue="#{hardware.id_sol_hard}" itemLabel="#{hardware.nombre_sol_hard}" />
                     </p:selectOneMenu>
                     
-                    
-                    
-                    
-
                     <p:outputLabel>Lista Solicitud Software</p:outputLabel>
                     <p:multiSelectListbox value="#{tipoBean.lista}" effect="slide" header="Categories" showHeaders="true">
                             <f:selectItems value="#{softwareBean.lista}" />
                     </p:multiSelectListbox>
-
-                    
-                    
-                    
-                    
-                    
-
-                    
+                   
                 </p:panelGrid>
             </p:panel>
             

@@ -32,7 +32,7 @@ public class DaoSoftwareImpl implements DaoSoftware<Software> {
             connect = JdbcConnect.getConnect();
 
             PreparedStatement pst = connect.
-                    prepareStatement("Insert into Software(id_sol_soft,nombre_sol_soft) values(?,?)");
+                    prepareStatement("Insert into sol_software(id_sol_soft,nombre_sol_soft) values(?,?)");
 
             pst.setInt(1, s.getId_sol_soft());
             pst.setString(2, s.getNombre_sol_soft());
@@ -67,7 +67,7 @@ public class DaoSoftwareImpl implements DaoSoftware<Software> {
             connect = JdbcConnect.getConnect();
 
             PreparedStatement pst = connect.
-                     prepareStatement("Update Software set nombre_sol_soft=? where id_sol_soft=?");
+                     prepareStatement("Update sol_software set nombre_sol_soft=? where id_sol_soft=?");
             pst.setInt(2, s.getId_sol_soft());
             pst.setString(1, s.getNombre_sol_soft());
             
@@ -92,7 +92,7 @@ public class DaoSoftwareImpl implements DaoSoftware<Software> {
 
             connect = JdbcConnect.getConnect();
 
-            PreparedStatement pst = connect.prepareStatement("Delete from Software where id_sol_soft=?");
+            PreparedStatement pst = connect.prepareStatement("Delete from sol_software where id_sol_soft=?");
             
             pst.setInt(1, s.getId_sol_soft());
             
@@ -116,7 +116,7 @@ public class DaoSoftwareImpl implements DaoSoftware<Software> {
         List<Software> lista = new ArrayList<>();
         try {
             Connection connect = JdbcConnect.getConnect();
-            PreparedStatement pst = connect.prepareStatement("Select id_sol_soft,nombre_sol_soft from Software ");
+            PreparedStatement pst = connect.prepareStatement("Select id_sol_soft,nombre_sol_soft from sol_software ");
             ResultSet rs = pst.executeQuery();
             
             while (rs.next()) {
@@ -155,7 +155,7 @@ public class DaoSoftwareImpl implements DaoSoftware<Software> {
      public boolean existe(Software s) throws SQLException, ClassNotFoundException {
 
         Connection connect = JdbcConnect.getConnect();
-        PreparedStatement pst = connect.prepareStatement("Select * from Software where id_sol_soft=?");
+        PreparedStatement pst = connect.prepareStatement("Select * from sol_software where id_sol_soft=?");
         pst.setInt(1, s.getId_sol_soft());
         ResultSet rs = pst.executeQuery();
         while (rs.next()) {
