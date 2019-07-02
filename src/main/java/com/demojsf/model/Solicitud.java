@@ -6,7 +6,6 @@ import java.util.Date;
  public class Solicitud {
 
     private int id_solicitud;
-    private int num_solicitud;
     private Date fecha_solicitud;
     private int id_area;
     private int id_usuario;
@@ -16,6 +15,10 @@ import java.util.Date;
     private int id_estado;
     private int id_tipo_solicitud;
     private int id_lista_solicitud;
+    
+    public Solicitud() {
+        this.fecha_solicitud = new Date();
+    }
 
     public int getId_solicitud() {
         return id_solicitud;
@@ -23,14 +26,6 @@ import java.util.Date;
 
     public void setId_solicitud(int id_solicitud) {
         this.id_solicitud = id_solicitud;
-    }
-
-    public int getNum_solicitud() {
-        return num_solicitud;
-    }
-
-    public void setNum_solicitud(int num_solicitud) {
-        this.num_solicitud = num_solicitud;
     }
     
     public Date getFecha_solicitud() {
@@ -107,8 +102,8 @@ import java.util.Date;
     
      @Override
     public String toString() {
-        return "Solicitud{" + ", id_solicitud=" + id_solicitud + ", num_solicitud=" 
-                + num_solicitud + ", fecha_solicitud=" + fecha_solicitud + ", id_area=" 
+        return "Solicitud{" + ", id_solicitud=" + id_solicitud + ", "
+                + "fecha_solicitud=" + fecha_solicitud + ", id_area=" 
                 + id_area + ", id_usuario=" + id_usuario + ", cargo_solicitud=" 
                 + cargo_solicitud + ", asunto_solicitud=" + asunto_solicitud + ", observacion=" 
                 + observacion + ", id_estado=" + id_estado + ", id_tipo_solicitud=" 

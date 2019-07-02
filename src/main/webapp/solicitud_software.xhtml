@@ -31,10 +31,7 @@
                     
                     <p:outputLabel for="id_solicitud">Id Solicitud</p:outputLabel>
                     <p:inputText id="id_solicitud" readonly="true" value="#{solicitudBean.solicitud.id_solicitud}"></p:inputText>
-                    
-                    <p:outputLabel for="num_solicitud">Número Solicitud</p:outputLabel> 
-                    <p:inputText id="num_solicitud" value="#{solicitudBean.solicitud.num_solicitud}"></p:inputText>
-                    
+                                                            
                     <p:outputLabel for="fecha_solicitud">Fecha Solicitud</p:outputLabel>
                     <p:calendar id="fecha_solicitud" required="true" value="#{solicitudBean.solicitud.fecha_solicitud}" showOn="button" />
                     
@@ -43,10 +40,12 @@
                         <f:selectItems value="#{areaBean.lista}" var="area" itemValue="#{area.id_area}" itemLabel="#{area.nombre_area}" />
                     </p:selectOneMenu>
                     
-                    <p:outputLabel for="id_usuario">Id Usuario</p:outputLabel>
-                    <p:inputNumber id="id_usuario" required="true" value="#{solicitudBean.solicitud.id_usuario}" ></p:inputNumber>
+                    <p:outputLabel>Usuario</p:outputLabel>
+                    <p:selectOneMenu filter="true" filterMatchMode="contains" value="#{usuarioBean.usuario.iduser}" >     
+                        <f:selectItems value="#{usuarioBean.lista}" var="usuario" itemValue="#{usuario.iduser}" itemLabel="#{usuario.nombre_usuario}" />
+                    </p:selectOneMenu>
                     
-                    <p:outputLabel for="cargo_solicitud">Cargo Solicitud</p:outputLabel>
+                    <p:outputLabel for="cargo_solicitud">Cargo en la empresa</p:outputLabel>
                     <p:inputText id="cargo_solicitud" placeholder="Digite su cargo en la empresa" value="#{solicitudBean.solicitud.cargo_solicitud}" ></p:inputText>
                     
                     <p:outputLabel for="asunto_solicitud">Asunto Solicitud</p:outputLabel>
@@ -69,67 +68,51 @@
                     <p:selectOneMenu value="#{softwareBean.software.id_sol_soft}" >     
                         <f:selectItems value="#{softwareBean.lista}" var="software" itemValue="#{software.id_sol_soft}" itemLabel="#{software.nombre_sol_soft}" />
                     </p:selectOneMenu>
-                    
-                    <p:outputLabel>Tipo Solicitud Hardware</p:outputLabel>
-                    <p:selectOneMenu value="#{hardwareBean.hardware.id_sol_hard}" >     
-                        <f:selectItems value="#{hardwareBean.lista}" var="hardware" itemValue="#{hardware.id_sol_hard}" itemLabel="#{hardware.nombre_sol_hard}" />
-                    </p:selectOneMenu>
-                    
-                    <p:outputLabel>Lista Solicitud Software</p:outputLabel>
-                    <p:multiSelectListbox value="#{tipoBean.lista}" effect="slide" header="Categories" showHeaders="true">
-                            <f:selectItems value="#{softwareBean.lista}" />
-                    </p:multiSelectListbox>
-                   
                 </p:panelGrid>
             </p:panel>
             
             <p:panel header="Listado de Solicitudes">
-                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay contratos creados" id="tabla" value="#{solicitudBean.lista}" var="item">
+                <p:dataTable  paginator="true" rows="10" emptyMessage="No hay solicitudes creadas" id="tabla" value="#{solicitudBean.lista}" var="item">
                     
-                    <p:column sortBy="#{item.id_solicitud}" headerText="id_solicitud">
+                    <p:column sortBy="#{item.id_solicitud}" headerText="Id Solicitud">
                         <h:outputText value="#{item.id_solicitud}"></h:outputText>
                     </p:column>
                     
-                    <p:column sortBy="#{item.num_solicitud}" headerText="numcontrato">
-                        <h:outputText value="#{item.num_solicitud}"></h:outputText>
-                    </p:column>
-                    
-                    <p:column  headerText="fecha_solicitud">
+                    <p:column  headerText="Fecha Solicitud">
                         <h:outputText value="#{item.fecha_solicitud}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="id_area">
+                    <p:column headerText="Id Area">
                         <h:outputText value="#{item.id_area}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="id_usuario">
+                    <p:column headerText="Id Usuario">
                         <h:outputText value="#{item.id_usuario}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="cargosolicitud">
+                    <p:column headerText="Cargo Solicitud">
                         <h:outputText value="#{item.cargo_solicitud}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="asuntosolicitud">
+                    <p:column headerText="Asunto Solicitud">
                         <h:outputText value="#{item.asunto_solicitud}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="observacion">
+                    <p:column headerText="Observación">
                         <h:outputText value="#{item.observacion}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="id_estado">
+                    <p:column headerText="Id Estado">
                         <h:outputText value="#{item.id_estado}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="id_tipo_solicitud">
+                    <p:column headerText="Id Tipo Solicitud">
                         <h:outputText value="#{item.id_tipo_solicitud}"></h:outputText>
                     </p:column>
                     
-                    <p:column headerText="id_lista_solicitud">
+                    <p:column headerText="Lista Solicitud">
                         <h:outputText value="#{item.id_lista_solicitud}"></h:outputText>
                     </p:column>
-                    
                     <p:column style="width:100px;text-align: center" headerText="Cargar">
                         <p:commandButton update="@form" process="@this" actionListener="#{solicitudBean.changeMode()}" icon="fa fa-eye Fs16 white" title="View">
                             <f:setPropertyActionListener value="#{item}" target="#{solicitudBean.solicitud}" />

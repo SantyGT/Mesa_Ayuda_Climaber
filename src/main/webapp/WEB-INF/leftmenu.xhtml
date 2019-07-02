@@ -20,15 +20,16 @@
         <h:form id="menuform">
             <ps:menu id="sm_leftmenu">
                 <p:menuitem id="sm_dashboard" value="Inicio" icon="icon-home-outline" outcome="dashboard" containerStyleClass="layout-menubar-active"/>
-                <p:menuitem id="sm_software" value="Software" icon="icon-list-alt" outcome="software" />
-                <p:menuitem id="sm_hardware" value="Hardware" icon="icon-list-alt" outcome="hardware" />
-                <p:menuitem id="sm_solicitud" value="Solicitud de Software" icon="icon-tasks" outcome="solicitud" />
+                <p:menuitem id="sm_solicitud" value="Solicitud de Software" icon="icon-tasks" outcome="solicitud_software" />
                 
                 <p:submenu id="sm_registros" label="Registros" icon="icon-tasks" >
+                    <p:menuitem id="sm_usuarios" value="Usuarios" icon="icon-users" outcome="user"/>
+                    <p:menuitem id="sm_software" value="Software" icon="icon-list-alt" outcome="software" />
+                    <p:menuitem id="sm_hardware" value="Hardware" icon="icon-list-alt" outcome="hardware" />
                     <p:menuitem id="sm_area" value="Area" icon="icon-list-alt" outcome="area" />
                     <p:menuitem id="sm_tipo" value="Tipo" icon="icon-list-alt" outcome="tipo" />
                     <p:menuitem id="sm_estado" value="Estado" icon="icon-list-alt" outcome="estado" />
-                    <p:menuitem id="sm_usuarios" value="Usuarios" icon="icon-users" outcome="user"/>
+                    
                 </p:submenu>
                 <p:separator />
                 <p:menuitem id="sm_inf_consul" value="Informes y Consultas" icon="icon-chart-bar" outcome="info_consul" />
